@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+    <changeSet id="create-temp_table-201708291430" author="Sanish">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="temp" />
+            </not>
+        </preConditions>
+
+        <sql>
+            CREATE  TABLE IF NOT EXISTS temp (
+            temp_id INT NOT NULL AUTO_INCREMENT ,
+            name VARCHAR(50) NOT NULL ,
+            date_created DATETIME NOT NULL ,
+            creator INT NOT NULL ,
+            date_changed DATETIME NULL ,
+            changed_by INT NULL ,
+            uuid  VARCHAR(38) NOT NULL UNIQUE,
+            voided TINYINT NULL ,
+            PRIMARY KEY (temp_id) ,
+            UNIQUE INDEX name_UNIQUE (name ASC) )
+        </sql>
+    </changeSet>
+</databaseChangeLog>
